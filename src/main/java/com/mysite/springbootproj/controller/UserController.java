@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -57,5 +58,12 @@ public class UserController {
     public String updateUser(User user){
         userService.createUser(user);
         return "redirect:/users";
+    }
+
+    @PostMapping("/user-search")
+    public String searchUserByLastName(@RequestParam("lastName") String lastName, Model model){
+        List<User> users = userService.findByLastName(lastName);
+        model.addAttribute("users", users);
+        return "UserList";
     }
 }

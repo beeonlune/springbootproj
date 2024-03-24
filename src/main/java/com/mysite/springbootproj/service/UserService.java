@@ -27,11 +27,16 @@ public class UserService {
         return userRepo.findAll();
     }
 
+
     public User createUser(User user){
         return userRepo.save(user);
     }
 
     public void deleteUser(Long id) {
         userRepo.deleteById(id);
+    }
+
+    public List<User> findByLastName(String lastName){
+        return userRepo.findByLastName(lastName);
     }
 }

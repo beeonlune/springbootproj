@@ -77,5 +77,11 @@
     </div>
     <p><a href="/user-create">Add a user</a></p>
 </div>
+<div>
+    <form th:action="@{/user-search}" method="post">
+        <input type="text" id="lastName" name="lastName" placeholder="Enter Last Name">
+        <button type="submit">Search</button>
+    </form>
+</div>
 </body>
 </html>
