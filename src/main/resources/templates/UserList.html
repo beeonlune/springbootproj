@@ -4,28 +4,45 @@
     <meta charset="UTF-8">
     <title>Users</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white;
-            color: black;
-        }
         h2 {
+            color: #c00;
+            font-family: sans-serif;
+            font-size: 2em;
+            margin-bottom: 0;
             text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 20px;
         }
         table {
-            margin: 0 auto;
-            border-collapse: collapse;
+            font-family: sans-serif;
             width: 80%;
+            margin: 0 auto;
+            border-collapse: separate;
+            border-spacing: .25em 1em;
         }
         th, td {
-            padding: 10px;
-            border: 1px solid black;
+            padding: .25em .5em;
+            text-align: left;
+        }
+        th:nth-child(2),
+        td:nth-child(2) {
+            text-align: right;
+        }
+        td {
+            background-color: #eee;
         }
         th {
-            font-weight: bold;
+            background-color: #009;
+            color: #fff;
+        }
+        .zigzag {
+            border-collapse: separate;
+            border-spacing: .25em 1em;
+        }
+        tbody tr:nth-child(odd) {
+            transform: rotate(0.5deg);
+        }
+        thead tr,
+        tbody tr:nth-child(even) {
+            transform: rotate(-0.5deg);
         }
         a {
             color: green;
@@ -34,6 +51,21 @@
         }
         a:hover {
             text-decoration: underline;
+        }
+        .add-user-button{
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: green;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 17px;
+            border: 1px solid grey;
+            cursor: pointer;
+            width: 28%;
+            box-sizing: border-box;
+            margin-top: 20px;
+            text-align: center;
         }
         .add-button {
             text-align: center;
@@ -47,6 +79,27 @@
             text-decoration: none;
             border-radius: 5px;
         }
+        form.example {
+            text-align: center;
+            font-family: sans-serif;
+            margin: 20px auto;
+            width: 50%;
+        }
+        form.example input[type=text] {
+            padding: 10px;box;
+        }
+        form.example button {
+            padding: 10px 20px;
+            font-size: 17px;
+            border: 1px solid grey;
+            cursor: pointer;
+            font-family: sans-serif;
+            width: 28%;
+            box-sizing: border-box;
+        }
+        form.example button:hover {
+            background: green;
+        }
     </style>
 </head>
 <body>
@@ -54,14 +107,14 @@
     <h2 th:case="null">No users found!</h2>
     <div th:case="*">
         <h2>Users</h2>
-        <table>
+        <table class="zigzag">
             <thead>
             <tr>
-                <th>Id</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th class="header">Id</th>
+                <th class="header">First Name</th>
+                <th class="header">Last Name</th>
+                <th class="header">Edit</th>
+                <th class="header">Delete</th>
             </tr>
             </thead>
             <tbody>
@@ -75,10 +128,12 @@
             </tbody>
         </table>
     </div>
-    <p><a href="/user-create">Add a user</a></p>
+</div>
+<div class="add-button">
+    <button class="add-user-button" onclick="window.location.href='/user-create'">Add a user</button>
 </div>
 <div>
-    <form th:action="@{/user-search}" method="post">
+    <form class="example" th:action="@{/user-search}" method="post">
         <input type="text" id="lastName" name="lastName" placeholder="Enter Last Name">
         <button type="submit">Search</button>
     </form>
